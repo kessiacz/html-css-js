@@ -1,154 +1,47 @@
-/* Configurações da página: define o fundo, a fonte e centraliza os elementos */
-body {
-    background-color: #13131F;
-    color: antiquewhite;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden; /* Garante que nada escape para os lados */
-    width: 100%;
-}
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@500;600&display=swap");
 
-/* Título principal: espaçamento e transição para o efeito de hover */
-h2 {
-    text-align: center;
-    padding-top: 32px;
-    margin: 0;
-    transition: all 0.3s ease;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; }
+:root { font-size: 62.5%; scroll-behavior: smooth; }
 
-/* Efeito no Título: aplica o gradiente no texto quando o mouse passa */
-header h2:hover {
-    background-image: linear-gradient(90deg, #8257E6 0%, #A40EFF 92.32%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+body { background-color: #13131F; color: #F9F9F9; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
-/* Linha decorativa: atravessa a tela abaixo do título */
-header h2::after {
-    margin-top: 30px;
-    content: '';
-    display: block;
-    width: 100vw;
-    height: .1rem;
-    background-image: linear-gradient(90deg, #8257E6 0%, #A40EE4 92.32%);
-}
+/* HEADER */
+header { position: sticky; top: 0; width: 100%; background-color: #13131F; z-index: 1000; border-bottom: 0.1rem solid rgba(130, 87, 230, 0.2); }
+header .container { display: flex; justify-content: space-between; align-items: center; padding: 2.2rem 5%; max-width: 1200px; margin: 0 auto; }
+.header-left { display: flex; align-items: center; gap: 2rem; }
+.menu i, .back-button i { font-size: 2.4rem; color: #8257E6; cursor: pointer; transition: 0.3s; }
+header h2 { font-size: 2rem; font-family: 'Poppins'; font-weight: 600; color: #F9F9F9; letter-spacing: 1px; }
 
-/* Links: define o espaçamento de 10% e a posição para a linha animada */
-.links {
-    text-align: center;
-    margin: 20px 0;
-}
+/* TOGGLE TEMA */
+.toggle .label { display: flex; background: #8257E6; width: 5.5rem; height: 2.6rem; border-radius: 2rem; padding: 0.3rem; cursor: pointer; position: relative; }
+.toggle input { opacity: 0; position: absolute; }
+.toggle .box { background-color: #13131F; height: 2rem; width: 2rem; border-radius: 50%; transition: 0.4s; }
+.toggle input:checked + .label { background-color: #F9F9F9; }
+.toggle input:checked + .label .box { transform: translateX(2.9rem); background-color: #13131F; }
 
-.links a {
-    color: antiquewhite;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 0 10%; 
-    padding-bottom: 10px;
-    position: relative;
-    transition: 0.3s;
-}
+/* MENU LATERAL (VERTICAL) */
+.menuOpen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(19, 19, 31, 0.98); backdrop-filter: blur(10px); z-index: 2000; display: flex; justify-content: center; align-items: center; }
+.menu-content { display: flex; flex-direction: column; align-items: center; }
+.menuOpen h2 { font-size: 2.4rem; color: #8257E6; margin-bottom: 5rem; font-family: 'Poppins'; }
+.menuOpen nav { display: flex; flex-direction: column; gap: 3.5rem; text-align: center; }
+.menuOpen a { font-size: 3.2rem; color: #F9F9F9; font-weight: 600; transition: 0.3s; font-family: 'Poppins'; }
+.menuOpen a:hover { color: #8257E6; transform: scale(1.05); }
+.hidden { display: none !important; }
 
-/* Linha do Hover: começa invisível (width 0) e cresce no hover */
-.links a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-image: linear-gradient(90deg, #8257E6 0%, #A40EE4 92.32%);
-    transition: width 0.4s ease;
-}
+/* CONTEÚDO EXERCÍCIOS */
+.page-title { text-align: center; margin: 6rem 0 4rem; }
+.page-title h2 { font-size: 3.2rem; font-family: 'Poppins'; text-transform: uppercase; line-height: 1.2; }
+.container-exercicios { width: 90%; max-width: 800px; margin: 0 auto 10rem; }
+details { background-color: #1c1c2d; border-radius: 1.5rem; margin-bottom: 2rem; border: 1px solid #2a2a40; transition: 0.3s; }
+summary { padding: 2.5rem; cursor: pointer; font-size: 1.8rem; font-weight: 600; display: flex; justify-content: space-between; outline: none; color: #F9F9F9;}
+summary::after { content: '+'; color: #8257E6; font-size: 2.2rem; }
+details[open] summary::after { content: '-'; }
+.content { padding: 0 2.5rem 2.5rem; font-size: 1.6rem; color: #828282; line-height: 1.8; }
 
-.links a:hover::before {
-    width: 100%;
-}
-
-/* Efeito nos Links: aplica o gradiente no texto ao passar o mouse */
-.links a:hover {
-    background-image: linear-gradient(90deg, #8257E6 0%, #A40EE4 92.32%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Lista de exercícios: centraliza a caixa com largura máxima de 800px */
-.container-exercicios {
-    width: 90%;
-    max-width: 800px;
-    margin: 40px auto;
-}
-
-/* Accordion (Exercício): define o visual da caixa e a borda roxa no hover */
-details {
-    background-color: #1c1c2d;
-    border: 1px solid #2a2a40;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-}
-
-details:hover {
-    border-color: #8257E6;
-}
-
-/* Cabeçalho do Exercício: remove a seta padrão e alinha o texto e o ícone (+) */
-summary {
-    padding: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    outline: none;
-}
-
-summary:hover {
-    background-color: #252538;
-}
-
-/* Exercício Aberto: muda a cor da borda e destaca o título clicado */
-details[open] {
-    border-color: #A40EFF;
-}
-
-details[open] summary {
-    border-bottom: 1px solid #2a2a40;
-    background-color: #252538;
-    color: #8257E6;
-}
-
-/* Conteúdo interno: estiliza o texto do enunciado do exercício */
-.content {
-    padding: 25px;
-    background-color: #13131F;
-    line-height: 1.6;
-    color: #ccc;
-}
-
-/* Ícones dinâmicos: define o sinal de "+" que vira "-" ao abrir */
-summary::after {
-    content: '+';
-    font-size: 24px;
-    color: #8257E6;
-    transition: transform 0.3s;
-}
-
-details[open] summary::after {
-    content: '-';
-    transform: rotate(180deg);
-}
-
-/* Scrollbar: personaliza a barra de rolagem lateral com a sua cor roxa */
-::-webkit-scrollbar {
-    width: 0.5rem;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #8257E6;
-}
+/* LIGHT MODE */
+body.light-mode { background-color: #F9F9F9; color: #13131F; }
+body.light-mode header h2 { color: #8257E6; }
+body.light-mode header { background-color: #13131F; }
+body.light-mode .banner h1, body.light-mode .banner p, body.light-mode h2 { color: #13131F; }
+body.light-mode .folder-card { background-color: #EEEEEE; border: 0.1rem solid #DDD; }
+body.light-mode .icon .box { background-color: #EEEEEE; }
