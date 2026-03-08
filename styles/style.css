@@ -55,3 +55,28 @@ body.light-mode .icon .box { background-color: #EEEEEE; }
 /* SUPORTE FIREFOX */
 * { scrollbar-width: thin; scrollbar-color: #8257E6 #13131F; }
 body.light-mode { scrollbar-color: #8257E6 #F9F9F9; }
+
+/*Padrão formulario */
+.content form {display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; align-items: center; }
+
+/* Input */
+.content input[type="number"],
+.content input[type="text"] { width: 100%; padding: 1rem 1.5rem; background: var(--input-bg); border: 2px solid #13131F; border-radius: 5rem; color: #8257E6; font-size: 1.5rem; font-family: 'Poppins', sans-serif; font-weight: bold; transition: 0.3s; outline: none; text-align: center; }
+.content input:focus { border-color: #8257E6; background: #1a1a2e; }
+
+/* Botão */
+.content button { background: #8257E6; color: #F9F9F9; border: none; padding: 0.8rem 4.5rem; border-radius: 5rem; cursor: pointer; font-weight: bold; transition: 0.3s; font-family: 'Poppins', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; width: fit-content; min-width: 220px; }
+.content button:hover { background: #9466ff; transform: scale(1.05); }
+
+/* Ajuste para o resultado acompanhar o arredondamento */
+.resultado { width: 100%; margin-top: 1.8rem; padding: 1.2rem 2rem; background: rgba(130, 87, 230, 0.15); border-left: 6px solid #8257E6; border-radius: 0.8rem; font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 500; color: #F9F9F9; text-align: center; line-height: 1.4; }
+
+/* Ajuste para o modo claro, se necessário */
+.light-mode .content input { border: 2px solid #dce2e6; background: #fff; }
+
+/* REMOVER SETAS PADRÃO DO INPUT NUMBER */
+.content input[type="number"]::-webkit-outer-spin-button,
+.content input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Firefox */
+.content input[type="number"] { -moz-appearance: textfield; appearance: textfield; }

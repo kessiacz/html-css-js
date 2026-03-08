@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.ri-close-line');
     const menuOverlay = document.querySelector('#menuOverlay');
 
-    // Troca de Tema
+    // --- LÓGICA DE INTERFACE (TEMA E MENU) ---
+
     if (checkbox) {
         checkbox.addEventListener('change', () => {
             document.body.classList.toggle('light-mode');
         });
     }
 
-    // Abrir Menu
     const openMenu = () => {
         menuOverlay.classList.remove('hidden');
         menuBtn.classList.add('hidden');
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
     };
 
-    // Fechar Menu
     const closeMenu = () => {
         menuOverlay.classList.add('hidden');
         menuBtn.classList.remove('hidden');
@@ -30,377 +29,153 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuBtn) menuBtn.addEventListener('click', openMenu);
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
-    // FECHAR AO CLICAR FORA (No fundo do overlay)
     menuOverlay.addEventListener('click', (event) => {
-        if (event.target === menuOverlay) {
-            closeMenu();
-        }
+        if (event.target === menuOverlay) closeMenu();
     });
 
-    // Fechar ao clicar em links
     const links = menuOverlay.querySelectorAll('a');
     links.forEach(link => link.addEventListener('click', closeMenu));
-});
 
-// Exercicio 1: Desconto de 15%
-const form1 = document.getElementById('formExercicio1');
-const displayResultado1 = document.getElementById('resultado1');
-if (form1) {
-    form1.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const valorOriginal = parseFloat(document.getElementById('valorNumerico').value);
-        const valorFinal = valorOriginal - (valorOriginal * 0.15);
-        displayResultado1.innerHTML = `O valor com 15% de desconto é: R$ ${valorFinal.toFixed(2)}`;
+
+    // --- LÓGICA DOS EXERCÍCIOS ---
+
+    // Função auxiliar para configurar os eventos de formulário
+    const handleForm = (id, callback) => {
+        const form = document.getElementById(`formExercicio${id}`);
+        const resultArea = document.getElementById(`resultado${id}`);
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                callback(form, resultArea);
+            });
+        }
+    };
+
+    // 01: Desconto de 15%
+    handleForm(1, (form, res) => {
+        const valor = parseFloat(document.getElementById('valorNumerico').value);
+        const final = valor * 0.85;
+        res.innerHTML = `O valor com 15% de desconto é: <strong>R$ ${final.toFixed(2)}</strong>`;
     });
-}
 
-// Exercicio 2: Divisão
-const form2 = document.getElementById('formExercicio2');
-const displayResultado2 = document.getElementById('resultado2');
-if (form2) {
-    form2.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const valor1 = parseFloat(document.getElementById('valor1').value);
-        const valor2 = parseFloat(document.getElementById('valor2').value);
-        const divisao = valor1 / valor2;
-        displayResultado2.innerHTML = `A divisão dos valores é igual a: ${divisao.toFixed(2)}`;
+    // 02: Divisão
+    handleForm(2, (form, res) => {
+        const v1 = parseFloat(document.getElementById('valor1').value);
+        const v2 = parseFloat(document.getElementById('valor2').value);
+        res.innerHTML = v2 !== 0 ? `Resultado: <strong>${(v1 / v2).toFixed(2)}</strong>` : "Erro: Divisão por zero!";
     });
-}
 
-// Exercicio 3: Dias vividos (Idade * 365)
-const form3 = document.getElementById('formExercicio3');
-const displayResultado3 = document.getElementById('resultado3');
-if (form3) {
-    form3.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const idade = parseFloat(document.getElementById('idade').value);
-        const dias_vividos = idade * 365;
-        displayResultado3.innerHTML = `Você viveu aproximadamente ${dias_vividos} dias`;
+    // 03: Dias vividos
+    handleForm(3, (form, res) => {
+        const idade = parseInt(document.getElementById('idade').value);
+        res.innerHTML = `Você viveu aproximadamente <strong>${idade * 365} dias</strong>.`;
     });
-}
 
-// Exercicio 4: Converter dias em anos, meses e dias
-const form4 = document.getElementById('formExercicio4');
-const displayResultado4 = document.getElementById('resultado4');
-if (form4) {
-    form4.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const inputDias = parseInt(document.getElementById('dias').value);
-        let totalDias = parseInt(document.getElementById('dias').value);
-    
-        const anos = Math.floor(totalDias / 365);
-        totalDias %= 365;
-        const meses = Math.floor(totalDias / 30);
-        const dias = totalDias % 30;
-        displayResultado4.innerHTML = `${inputDias} dias equivale a ${anos} anos, ${meses} mes(es), ${dias} dia(s)`;
+    // 04: Converter dias
+    handleForm(4, (form, res) => {
+        let total = parseInt(document.getElementById('dias').value);
+        const anos = Math.floor(total / 365);
+        total %= 365;
+        const meses = Math.floor(total / 30);
+        const dias = total % 30;
+        res.innerHTML = `<strong>${anos} anos, ${meses} meses e ${dias} dias.</strong>`;
     });
-}
 
-// Exercicio 5: Média de consumo (Km/L)
-const form5 = document.getElementById('formExercicio5');
-const displayResultado5 = document.getElementById('resultado5');
-if (form5) {
-    form5.addEventListener('submit', (event) => {
-        event.preventDefault();
+    // 05: Km/L
+    handleForm(5, (form, res) => {
         const km = parseFloat(document.getElementById('km').value);
-        const litros = parseFloat(document.getElementById('litros').value);
-
-        const media = km / litros
-        displayResultado5.innerHTML = `A média percorrida foi ${media.toFixed(2)} Km/L`;
+        const l = parseFloat(document.getElementById('litros').value);
+        res.innerHTML = `Média: <strong>${(km / l).toFixed(2)} Km/L</strong>`;
     });
-}
 
-// Exercicio 6: Porcentagem de desconto aplicada
-const form6 = document.getElementById('formExercicio6');
-const displayResultado6 = document.getElementById('resultado6');
-if (form6) {
-    form6.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const valorProduto = parseFloat(document.getElementById('valorProduto').value);
-        const valorDesconto = parseFloat(document.getElementById('valorDesconto').value);
-
-        const porcentagem = (valorDesconto / valorProduto) * 100;
-        displayResultado6.innerHTML = `O desconto aplicado foi de ${porcentagem.toFixed(2)}%`;
+    // 06: % de Desconto
+    handleForm(6, (form, res) => {
+        const total = parseFloat(document.getElementById('valorProduto').value);
+        const desc = parseFloat(document.getElementById('valorDesconto').value);
+        const perc = ((total - desc) / total) * 100;
+        res.innerHTML = `O desconto aplicado foi de <strong>${perc.toFixed(2)}%</strong>`;
     });
-}
 
-// Exercicio 7: Identificar se é consoate
-const form7 = document.getElementById('formExercicio7');
-const displayResultado7 = document.getElementById('resultado7');
-
-if (form7) {
-    form7.addEventListener('submit', (event) => {
-        event.preventDefault();
-
+    // 07: Vogal ou Consoante
+    handleForm(7, (form, res) => {
         const letra = document.getElementById('letra').value.toLowerCase();
-
-        if (typeof letra === "string" && letra.length === 1) {
-
-            switch (letra) {
-                case 'a':
-                case 'e':
-                case 'i':
-                case 'o':
-                case 'u':
-                    displayResultado7.innerHTML = 'É VOGAL!';
-                    break;
-
-                default:
-                    displayResultado7.innerHTML = 'É CONSOANTE!';
-            }
-
-        } else {
-            displayResultado7.innerHTML = 'DIGITE UM VALOR VÁLIDO!';
-        }
+        const vogais = ['a', 'e', 'i', 'o', 'u'];
+        if (!/[a-z]/.test(letra)) res.innerHTML = "Por favor, digite uma letra.";
+        else res.innerHTML = vogais.includes(letra) ? "É uma <strong>VOGAL</strong>" : "É uma <strong>CONSOANTE</strong>";
     });
-}
 
-// Exercicio 8: Numero e dia correspondente
-const form8 = document.getElementById('formExercicio8');
-const displayResultado8 = document.getElementById('resultado8');
-if (form8) {
-    form8.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valorSemana = Number(document.getElementById("valor").value);
-
-        if (!isNaN(valorSemana)){
-
-            switch (valorSemana) {
-                case 1: 
-                    displayResultado8.innerHTML = 'DOMINGO';
-                    break;
-                case 2:
-                    displayResultado8.innerHTML = 'SEGUNDA-FEIRA';
-                    break;
-                case 3:
-                    displayResultado8.innerHTML = 'TERÇA-FEIRA';
-                    break;
-                case 4:
-                    displayResultado8.innerHTML = 'QUARTA-FEIRA';
-                    break;
-                case 5:
-                    displayResultado8.innerHTML = 'QUINTA-FEIRA';
-                    break;
-
-                case 6:
-                    displayResultado8.innerHTML = 'SEXTA-FEIRA';
-                    break;
-
-                case 7:
-                    displayResultado8.innerHTML = 'SÁBADO';
-                    break;
-
-                default:
-                    displayResultado8.innerHTML = 'VALOR INVÁLIDO';
-            }
-
-        } else {
-            displayResultado8.innerHTML = 'VALOR INVÁLIDO';
-        }
+    // 08: Dia da Semana
+    handleForm(8, (form, res) => {
+        const dias = ["", "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+        const num = parseInt(document.getElementById('valor').value);
+        res.innerHTML = dias[num] || "Valor inválido";
     });
-}
 
-// Exercicio 9: Descobrir o mês e os dias
-const form9 = document.getElementById('formExercicio9');
-const displayResultado9 = document.getElementById('resultado9');
-
-if (form9) {
-    form9.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valorMes = parseInt(document.getElementById("valorMes").value.trim());
-
+    // 09: Mês e Dias
+    handleForm(9, (form, res) => {
         const meses = [
-            { nome: 'JANEIRO', dias: 31 },
-            { nome: 'FEVEREIRO', dias: 28 },
-            { nome: 'MARÇO', dias: 31 },
-            { nome: 'ABRIL', dias: 30 },
-            { nome: 'MAIO', dias: 31 },
-            { nome: 'JUNHO', dias: 30 },
-            { nome: 'JULHO', dias: 31 },
-            { nome: 'AGOSTO', dias: 31 },
-            { nome: 'SETEMBRO', dias: 30 },
-            { nome: 'OUTUBRO', dias: 31 },
-            { nome: 'NOVEMBRO', dias: 30 },
-            { nome: 'DEZEMBRO', dias: 31 }
+            null, {n: "Janeiro", d: 31}, {n: "Fevereiro", d: 28}, {n: "Março", d: 31}, 
+            {n: "Abril", d: 30}, {n: "Maio", d: 31}, {n: "Junho", d: 30}, 
+            {n: "Julho", d: 31}, {n: "Agosto", d: 31}, {n: "Setembro", d: 30}, 
+            {n: "Outubro", d: 31}, {n: "Novembro", d: 30}, {n: "Dezembro", d: 31}
         ];
-
-        if (!isNaN(valorMes) && valorMes >= 1 && valorMes <= 12) {
-            const mesSelecionado = meses[valorMes - 1];
-            displayResultado9.innerHTML = `${mesSelecionado.nome} TEM ${mesSelecionado.dias} DIAS`;
-        } else {
-            displayResultado9.innerHTML = 'VALOR INVÁLIDO';
-        }
+        const num = parseInt(document.getElementById('valorMes').value);
+        res.innerHTML = meses[num] ? `${meses[num].n} tem ${meses[num].d} dias.` : "Mês inválido";
     });
-}
 
-// Exercicio 10: Numero maior
-const form10 = document.getElementById('formExercicio10');
-const displayResultado10 = document.getElementById('resultado10');
-
-if (form10) {
-    form10.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valorA = parseFloat(document.getElementById('valorA').value);
-        const valorB = parseFloat(document.getElementById('valorB').value);
-
-        if(valorA > valorB){
-            displayResultado10.innerHTML = `O PRIMEIRO (${valorA}) VALOR É MAIOR`;
-        }
-        else if(valorA < valorB){
-            displayResultado10.innerHTML = `O SEGUNDO (${valorB}) VALOR É MAIOR`;
-        }
-        else{
-            displayResultado10.innerHTML = `OS DOIS VALORES SÃO IGUAIS`;
-        }
+    // 10: Maior número
+    handleForm(10, (form, res) => {
+        const a = parseFloat(document.getElementById('valorA').value);
+        const b = parseFloat(document.getElementById('valorB').value);
+        if (a === b) res.innerHTML = "Os números são iguais.";
+        else res.innerHTML = `O maior é <strong>${Math.max(a, b)}</strong>`;
     });
-}
 
-// Exercicio 11: Numero par, impar, positivo e negativo
-const form11 = document.getElementById('formExercicio11');
-const displayResultado11 = document.getElementById('resultado11');
-
-if (form11) {
-    form11.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valor = Number(document.getElementById('valor11').value);
-
-        if (valor === 0) {
-            displayResultado11.innerHTML = 'O NÚMERO É ZERO';
-            return;
-        }
-
-        const tipo = valor > 0 ? "POSITIVO" : "NEGATIVO";
-        const paridade = valor % 2 === 0 ? "PAR" : "ÍMPAR";
-
-        displayResultado11.innerHTML = `O NÚMERO (${valor}) É ${tipo} E ${paridade}`;
+    // 11: Paridade e Sinal
+    handleForm(11, (form, res) => {
+        const n = parseFloat(document.getElementById('valor11').value);
+        const sinal = n >= 0 ? "Positivo" : "Negativo";
+        const paridade = n % 2 === 0 ? "Par" : "Ímpar";
+        res.innerHTML = `O número é <strong>${sinal}</strong> e <strong>${paridade}</strong>`;
     });
-}
 
-// Exercicio 12: Verificar se é um triangulo
-const form12 = document.getElementById('formExercicio12');
-const displayResultado12 = document.getElementById('resultado12');
-
-if (form12) {
-    form12.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valorA = Number(document.getElementById('valorA_12').value);
-        const valorB = Number(document.getElementById('valorB_12').value);
-        const valorC = Number(document.getElementById('valorC_12').value);
-
-
-        if (valorA > 0 && valorB > 0 && valorC > 0 && (valorA + valorB + valorC) === 180) {
-            displayResultado12.innerHTML = 'É UM TRIÂNGULO VÁLIDO';
-        } else {
-            displayResultado12.innerHTML = 'NÃO É UM TRIÂNGULO VÁLIDO';
-        }
+    // 12: Triângulo
+    handleForm(12, (form, res) => {
+        const a = parseFloat(document.getElementById('valorA_12').value);
+        const b = parseFloat(document.getElementById('valorB_12').value);
+        const c = parseFloat(document.getElementById('valorC_12').value);
+        res.innerHTML = (a + b + c === 180) ? "É um triângulo <strong>VÁLIDO</strong>" : "<strong>NÃO</strong> é um triângulo válido";
     });
-}
 
-// Exercicio 13: Verificar se o valor é multiplo
-const form13 = document.getElementById('formExercicio13');
-const displayResultado13 = document.getElementById('resultado13');
-
-if (form13) {
-    form13.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valorA = Number(document.getElementById('valorA_13').value);
-        const valorB = Number(document.getElementById('valorB_13').value);
-
-
-        if ((valorA % valorB) == 0) {
-            displayResultado13.innerHTML = `O NÚMERO (${valorA}) É MULTIPLO DE ${valorB}`;
-            return;
-        } else {
-            displayResultado13.innerHTML = `O NÚMERO (${valorA}) NÃO É MULTIPLO DE ${valorB}`;
-        }
+    // 13: Múltiplos
+    handleForm(13, (form, res) => {
+        const a = parseFloat(document.getElementById('valorA_13').value);
+        const b = parseFloat(document.getElementById('valorB_13').value);
+        res.innerHTML = a % b === 0 ? `${a} <strong>é múltiplo</strong> de ${b}` : `${a} <strong>não é múltiplo</strong> de ${b}`;
     });
-}
 
-// Exercicio 14: Verificar categoria de nadador
-const form14 = document.getElementById('formExercicio14');
-const displayResultado14 = document.getElementById('resultado14');
-
-if (form14) {
-    form14.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valorIdade = Number(document.getElementById('valor14').value);
-
-
-        if (valorIdade >= 5 && valorIdade <= 7) {
-            displayResultado14.innerHTML = `CATEGORIA: INFANTIL A`;
-            return;
-        } 
-        
-        else if(valorIdade >= 8 && valorIdade <= 10) {
-            displayResultado14.innerHTML = `CATEGORIA: INFANTIL B`;
-            return;
-        }
-        
-        else if(valorIdade >= 11 && valorIdade <= 13) {
-            displayResultado14.innerHTML = `CATEGORIA: JUVENIL A`;
-            return;
-        }
-        
-        else if(valorIdade >= 14 && valorIdade <= 17) {
-            displayResultado14.innerHTML = `CATEGORIA: JUVENIL B`;
-            return;
-        }
-
-        else {
-            displayResultado14.innerHTML = 'CATEGORIA: ADULTO';
-        }
+    // 14: Nadador
+    handleForm(14, (form, res) => {
+        const idade = parseInt(document.getElementById('valor14').value);
+        let cat = "";
+        if (idade >= 18) cat = "Adulto";
+        else if (idade >= 14) cat = "Juvenil B";
+        else if (idade >= 11) cat = "Juvenil A";
+        else if (idade >= 8) cat = "Infantil B";
+        else if (idade >= 5) cat = "Infantil A";
+        else cat = "Sem categoria (Mínimo 5 anos)";
+        res.innerHTML = `Categoria: <strong>${cat}</strong>`;
     });
-}
 
-// Exercicio 15: Classificação de angulo
-const form15 = document.getElementById('formExercicio15');
-const displayResultado15 = document.getElementById('resultado15');
-
-if (form15) {
-    form15.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const valor = Number(document.getElementById('valor15').value);
-
-        if(valor == 0 || valor == 180) {
-            displayResultado15.innerHTML = `ÂNGULO RADO`;
-            return;
-        }
-
-        else if(valor == 90) {
-            displayResultado15.innerHTML = `ÂNGULO RETO`;
-            return;
-        }
-
-        else if(valor == 360) {
-            displayResultado15.innerHTML = `ÂNGULO COMPLETO`;
-            return;
-        }
-
-        else if (valor > 0 && valor < 90) {
-            displayResultado15.innerHTML = `ÂNGULO AGUDO`;
-            return;
-        } 
-        
-        else if(valor > 90 && valor < 180) {
-            displayResultado15.innerHTML = `ÂNGULO OBTUSO`;
-            return;
-        }
-
-        else if(valor > 180 && valor < 360) {
-            displayResultado15.innerHTML = `ÂNGULO CÔNCAVO`;
-            return;
-        }
-
-        else {
-            displayResultado15.innerHTML = 'VALOR INCORRETO';
-        }
+    // 15: Ângulos
+    handleForm(15, (form, res) => {
+        const ang = parseFloat(document.getElementById('valor15').value);
+        let tipo = "";
+        if (ang < 90) tipo = "AGUDO";
+        else if (ang === 90) tipo = "RETO";
+        else if (ang < 180) tipo = "OBTUSO";
+        else if (ang === 180) tipo = "RASO";
+        else tipo = "Completo ou Côncavo";
+        res.innerHTML = `Classificação: <strong>${tipo}</strong>`;
     });
-}
+});
