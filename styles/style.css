@@ -46,7 +46,12 @@ body.light-mode .banner h1, body.light-mode .banner p, body.light-mode h2 { colo
 body.light-mode .folder-card { background-color: #EEEEEE; border: 0.1rem solid #DDD; }
 body.light-mode .icon .box { background-color: #EEEEEE; }
 
-/* SCROLL VIEW*/
-::-webkit-scrollbar { width: 0.5rem; }
-::-webkit-scrollbar-track { background: #13131F; }
-::-webkit-scrollbar-thumb { background: #8257E6; border-radius: 1rem;
+/* ESTILIZAÇÃO DO SCROLLBAR */
+::-webkit-scrollbar { width: 1rem; }
+::-webkit-scrollbar-track { background-color: #13131F; }
+::-webkit-scrollbar-thumb { background-color: #8257E6; border-radius: 1rem; border: 0.2rem solid #13131F; }
+::-webkit-scrollbar-thumb:hover { background-color: #9466ff; }
+
+/* SUPORTE FIREFOX */
+* { scrollbar-width: thin; scrollbar-color: #8257E6 #13131F; }
+body.light-mode { scrollbar-color: #8257E6 #F9F9F9; }
