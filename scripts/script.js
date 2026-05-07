@@ -1,181 +1,167 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const checkbox = document.querySelector('#checkbox');
-    const menuBtn = document.querySelector('.ri-menu-line');
-    const closeBtn = document.querySelector('.ri-close-line');
-    const menuOverlay = document.querySelector('#menuOverlay');
+// Toggle cards
+document.querySelectorAll('.card-header').forEach(h => {
+  h.addEventListener('click', () => {
+    const card = h.closest('.card');
+    const isOpen = card.classList.contains('open');
 
-    // --- LÓGICA DE INTERFACE (TEMA E MENU) ---
+    // fecha todos
+    document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
 
-    if (checkbox) {
-        checkbox.addEventListener('change', () => {
-            document.body.classList.toggle('light-mode');
-        });
-    }
-
-    const openMenu = () => {
-        menuOverlay.classList.remove('hidden');
-        menuBtn.classList.add('hidden');
-        closeBtn.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    };
-
-    const closeMenu = () => {
-        menuOverlay.classList.add('hidden');
-        menuBtn.classList.remove('hidden');
-        closeBtn.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    };
-
-    if (menuBtn) menuBtn.addEventListener('click', openMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-
-    menuOverlay.addEventListener('click', (event) => {
-        if (event.target === menuOverlay) closeMenu();
-    });
-
-    const links = menuOverlay.querySelectorAll('a');
-    links.forEach(link => link.addEventListener('click', closeMenu));
-
-
-    // --- LÓGICA DOS EXERCÍCIOS ---
-
-    // Função auxiliar para configurar os eventos de formulário
-    const handleForm = (id, callback) => {
-        const form = document.getElementById(`formExercicio${id}`);
-        const resultArea = document.getElementById(`resultado${id}`);
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                callback(form, resultArea);
-            });
-        }
-    };
-
-    // 01: Desconto de 15%
-    handleForm(1, (form, res) => {
-        const valor = parseFloat(document.getElementById('valorNumerico').value);
-        const final = valor * 0.85;
-        res.innerHTML = `O valor com 15% de desconto é: <strong>R$ ${final.toFixed(2)}</strong>`;
-    });
-
-    // 02: Divisão
-    handleForm(2, (form, res) => {
-        const v1 = parseFloat(document.getElementById('valor1').value);
-        const v2 = parseFloat(document.getElementById('valor2').value);
-        res.innerHTML = v2 !== 0 ? `Resultado: <strong>${(v1 / v2).toFixed(2)}</strong>` : "Erro: Divisão por zero!";
-    });
-
-    // 03: Dias vividos
-    handleForm(3, (form, res) => {
-        const idade = parseInt(document.getElementById('idade').value);
-        res.innerHTML = `Você viveu aproximadamente <strong>${idade * 365} dias</strong>.`;
-    });
-
-    // 04: Converter dias
-    handleForm(4, (form, res) => {
-        let total = parseInt(document.getElementById('dias').value);
-        const anos = Math.floor(total / 365);
-        total %= 365;
-        const meses = Math.floor(total / 30);
-        const dias = total % 30;
-        res.innerHTML = `<strong>${anos} anos, ${meses} meses e ${dias} dias.</strong>`;
-    });
-
-    // 05: Km/L
-    handleForm(5, (form, res) => {
-        const km = parseFloat(document.getElementById('km').value);
-        const l = parseFloat(document.getElementById('litros').value);
-        res.innerHTML = `Média: <strong>${(km / l).toFixed(2)} Km/L</strong>`;
-    });
-
-    // 06: % de Desconto
-    handleForm(6, (form, res) => {
-        const total = parseFloat(document.getElementById('valorProduto').value);
-        const desc = parseFloat(document.getElementById('valorDesconto').value);
-        const perc = ((total - desc) / total) * 100;
-        res.innerHTML = `O desconto aplicado foi de <strong>${perc.toFixed(2)}%</strong>`;
-    });
-
-    // 07: Vogal ou Consoante
-    handleForm(7, (form, res) => {
-        const letra = document.getElementById('letra').value.toLowerCase();
-        const vogais = ['a', 'e', 'i', 'o', 'u'];
-        if (!/[a-z]/.test(letra)) res.innerHTML = "Por favor, digite uma letra.";
-        else res.innerHTML = vogais.includes(letra) ? "É uma <strong>VOGAL</strong>" : "É uma <strong>CONSOANTE</strong>";
-    });
-
-    // 08: Dia da Semana
-    handleForm(8, (form, res) => {
-        const dias = ["", "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-        const num = parseInt(document.getElementById('valor').value);
-        res.innerHTML = dias[num] || "Valor inválido";
-    });
-
-    // 09: Mês e Dias
-    handleForm(9, (form, res) => {
-        const meses = [
-            null, {n: "Janeiro", d: 31}, {n: "Fevereiro", d: 28}, {n: "Março", d: 31}, 
-            {n: "Abril", d: 30}, {n: "Maio", d: 31}, {n: "Junho", d: 30}, 
-            {n: "Julho", d: 31}, {n: "Agosto", d: 31}, {n: "Setembro", d: 30}, 
-            {n: "Outubro", d: 31}, {n: "Novembro", d: 30}, {n: "Dezembro", d: 31}
-        ];
-        const num = parseInt(document.getElementById('valorMes').value);
-        res.innerHTML = meses[num] ? `${meses[num].n} tem ${meses[num].d} dias.` : "Mês inválido";
-    });
-
-    // 10: Maior número
-    handleForm(10, (form, res) => {
-        const a = parseFloat(document.getElementById('valorA').value);
-        const b = parseFloat(document.getElementById('valorB').value);
-        if (a === b) res.innerHTML = "Os números são iguais.";
-        else res.innerHTML = `O maior é <strong>${Math.max(a, b)}</strong>`;
-    });
-
-    // 11: Paridade e Sinal
-    handleForm(11, (form, res) => {
-        const n = parseFloat(document.getElementById('valor11').value);
-        const sinal = n >= 0 ? "Positivo" : "Negativo";
-        const paridade = n % 2 === 0 ? "Par" : "Ímpar";
-        res.innerHTML = `O número é <strong>${sinal}</strong> e <strong>${paridade}</strong>`;
-    });
-
-    // 12: Triângulo
-    handleForm(12, (form, res) => {
-        const a = parseFloat(document.getElementById('valorA_12').value);
-        const b = parseFloat(document.getElementById('valorB_12').value);
-        const c = parseFloat(document.getElementById('valorC_12').value);
-        res.innerHTML = (a + b + c === 180) ? "É um triângulo <strong>VÁLIDO</strong>" : "<strong>NÃO</strong> é um triângulo válido";
-    });
-
-    // 13: Múltiplos
-    handleForm(13, (form, res) => {
-        const a = parseFloat(document.getElementById('valorA_13').value);
-        const b = parseFloat(document.getElementById('valorB_13').value);
-        res.innerHTML = a % b === 0 ? `${a} <strong>é múltiplo</strong> de ${b}` : `${a} <strong>não é múltiplo</strong> de ${b}`;
-    });
-
-    // 14: Nadador
-    handleForm(14, (form, res) => {
-        const idade = parseInt(document.getElementById('valor14').value);
-        let cat = "";
-        if (idade >= 18) cat = "Adulto";
-        else if (idade >= 14) cat = "Juvenil B";
-        else if (idade >= 11) cat = "Juvenil A";
-        else if (idade >= 8) cat = "Infantil B";
-        else if (idade >= 5) cat = "Infantil A";
-        else cat = "Sem categoria (Mínimo 5 anos)";
-        res.innerHTML = `Categoria: <strong>${cat}</strong>`;
-    });
-
-    // 15: Ângulos
-    handleForm(15, (form, res) => {
-        const ang = parseFloat(document.getElementById('valor15').value);
-        let tipo = "";
-        if (ang < 90) tipo = "AGUDO";
-        else if (ang === 90) tipo = "RETO";
-        else if (ang < 180) tipo = "OBTUSO";
-        else if (ang === 180) tipo = "RASO";
-        else tipo = "Completo ou Côncavo";
-        res.innerHTML = `Classificação: <strong>${tipo}</strong>`;
-    });
+    // abre só este (se estava fechado)
+    if (!isOpen) card.classList.add('open');
+  });
 });
+
+// Scroll animations
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const i = +e.target.dataset.index;
+      setTimeout(() => e.target.classList.add('visible'), i % 3 * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.card').forEach(c => obs.observe(c));
+
+function show(id, msg, err=false) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'result show' + (err ? ' error' : '');
+}
+function val(id) { return document.getElementById(id).value; }
+function num(id) { return parseFloat(val(id)); }
+
+function calc01() {
+  const v = num('i01');
+  if(isNaN(v)||v<0) return show('r01','⚠ Informe um valor válido.',true);
+  const d = v*0.15, f = v-d;
+  show('r01',`Desconto: R$ ${d.toFixed(2)}\nValor final: R$ ${f.toFixed(2)}`);
+}
+function calc02() {
+  const a = num('i02a'), b = num('i02b');
+  if(isNaN(a)||isNaN(b)) return show('r02','⚠ Informe dois valores.',true);
+  if(b===0) return show('r02','⚠ Não é possível dividir por zero.',true);
+  show('r02',`Resultado: ${a} ÷ ${b} = ${(a/b).toFixed(4).replace(/\.?0+$/,'')}`);
+}
+function calc03() {
+  const i = num('i03');
+  if(isNaN(i)||i<0||i>120) return show('r03','⚠ Informe uma idade válida.',true);
+  const d = Math.round(i*365.25);
+  show('r03',`Você viveu aproximadamente ${d.toLocaleString('pt-BR')} dias! 🎉`);
+}
+function calc04() {
+  const d = num('i04');
+  if(isNaN(d)||d<0) return show('r04','⚠ Informe um número válido.',true);
+  const anos = Math.floor(d/365), resto1 = d%365;
+  const meses = Math.floor(resto1/30), dias = resto1%30;
+  show('r04',`${Math.floor(d)} dias =\n${anos} ano(s), ${meses} mês(es) e ${dias} dia(s)`);
+}
+function calc05() {
+  const km = num('i05a'), l = num('i05b');
+  if(isNaN(km)||isNaN(l)||l<=0||km<0) return show('r05','⚠ Informe valores válidos.',true);
+  show('r05',`Média de consumo: ${(km/l).toFixed(2)} km/L`);
+}
+function calc06() {
+  const t = num('i06a'), d = num('i06b');
+  if(isNaN(t)||isNaN(d)||t<=0) return show('r06','⚠ Informe valores válidos.',true);
+  if(d>t) return show('r06','⚠ O valor com desconto não pode ser maior que o original.',true);
+  const pct = ((t-d)/t)*100;
+  show('r06',`Desconto aplicado: ${pct.toFixed(2)}%\nEconomia: R$ ${(t-d).toFixed(2)}`);
+}
+function calc07() {
+  const l = val('i07').trim().toUpperCase();
+  if(!l||!/^[A-ZÀ-Ú]$/.test(l)) return show('r07','⚠ Informe uma letra válida.',true);
+  const v = 'AEIOUÁÉÍÓÚÂÊÎÔÛÃÕ'.includes(l);
+  show('r07',`"${l}" é uma ${v?'VOGAL 🔵':'CONSOANTE 🟠'}`);
+}
+function calc08() {
+  const n = num('i08');
+  if(isNaN(n)||n<1||n>7) return show('r08','⚠ Informe um número entre 1 e 7.',true);
+  const dias = ['','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado','Domingo'];
+  show('r08',`Número ${Math.round(n)} → ${dias[Math.round(n)]}`);
+}
+function calc09() {
+  const n = num('i09');
+  if(isNaN(n)||n<1||n>12) return show('r09','⚠ Informe um número entre 1 e 12.',true);
+  const m = [['Janeiro',31],['Fevereiro',28],['Março',31],['Abril',30],['Maio',31],['Junho',30],['Julho',31],['Agosto',31],['Setembro',30],['Outubro',31],['Novembro',30],['Dezembro',31]];
+  const [nome,dias] = m[Math.round(n)-1];
+  show('r09',`Mês ${Math.round(n)}: ${nome}\nDias: ${dias} (em ano não bissexto)`);
+}
+function calc10() {
+  const a = num('i10a'), b = num('i10b');
+  if(isNaN(a)||isNaN(b)) return show('r10','⚠ Informe dois números.',true);
+  if(a===b) return show('r10','Os dois números são iguais.');
+  show('r10',`O maior número é: ${a>b?a:b}`);
+}
+function calc11() {
+  const n = num('i11');
+  if(isNaN(n)) return show('r11','⚠ Informe um número.',true);
+  const par = n%2===0?'Par':'Ímpar';
+  const sinal = n>0?'Positivo':n<0?'Negativo':'Zero';
+  show('r11',`${n} → ${par} e ${sinal}`);
+}
+function calc12() {
+  const a = num('i12a'), b = num('i12b'), c = num('i12c');
+  if(isNaN(a)||isNaN(b)||isNaN(c)) return show('r12','⚠ Informe os três ângulos.',true);
+  const soma = a+b+c;
+  if(soma===180) show('r12',`✓ Triângulo válido! ${a}° + ${b}° + ${c}° = 180°`);
+  else show('r12',`✗ Não é um triângulo válido.\nSoma dos ângulos: ${soma}° (deveria ser 180°)`,true);
+}
+function calc13() {
+  const a = num('i13a'), b = num('i13b');
+  if(isNaN(a)||isNaN(b)||b===0) return show('r13','⚠ Informe valores válidos.',true);
+  if(a%b===0) show('r13',`✓ ${a} é múltiplo de ${b}. (${a} ÷ ${b} = ${a/b})`);
+  else show('r13',`✗ ${a} não é múltiplo de ${b}.`,true);
+}
+function calc14() {
+  const i = num('i14');
+  if(isNaN(i)||i<0) return show('r14','⚠ Informe uma idade válida.',true);
+  let cat;
+  if(i<=5) cat='Infantil (até 5 anos)';
+  else if(i<=10) cat='Mirim (6–10 anos)';
+  else if(i<=15) cat='Infantil Junior (11–15 anos)';
+  else if(i<=20) cat='Junior (16–20 anos)';
+  else if(i<=25) cat='Sênior (21–25 anos)';
+  else cat='Master (acima de 25 anos)';
+  show('r14',`Categoria: ${cat}`);
+}
+
+function calc15() {
+  const a = num('i15');
+  if(isNaN(a)||a<0||a>360) return show('r15','⚠ Informe um ângulo entre 0° e 360°.',true);
+  let tipo;
+  if(a===0) tipo='Nulo (0°)';
+  else if(a<90) tipo='Agudo (< 90°)';
+  else if(a===90) tipo='Reto (90°)';
+  else if(a<180) tipo='Obtuso (entre 90° e 180°)';
+  else if(a===180) tipo='Raso (180°)';
+  else tipo='Reentrante (> 180°)';
+  show('r15',`${a}° → ${tipo}`);
+}
+
+// ── Detecção touch ──
+const isTouch = () => window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+
+// ── Cursor (só desktop) ──
+if (!isTouch()) {
+  const dot = document.querySelector('.cursor-dot');
+  const out = document.querySelector('.cursor-outline');
+  if (dot && out) {
+    let mx=0,my=0,ox=0,oy=0;
+    window.addEventListener('mousemove', e => {
+      mx=e.clientX; my=e.clientY;
+      dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;
+    });
+    (function loop(){
+      ox+=(mx-ox)*.15; oy+=(my-oy)*.15;
+      out.style.transform=`translate(${ox}px,${oy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a,button,.project-card,.contact-item').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{out.style.width='55px';out.style.height='55px';out.style.backgroundColor='var(--teal-dim)';out.style.opacity='.2'});
+      el.addEventListener('mouseleave',()=>{out.style.width='34px';out.style.height='34px';out.style.backgroundColor='transparent';out.style.opacity='.4'});
+    });
+  }
+}
+

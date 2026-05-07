@@ -1,266 +1,336 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML - CSS - JS - Exercícios Corrigidos</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
-    <script defer src="scripts/script.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HTML · CSS · JS — Exercícios | Kessia Carvalho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles/style.css"/>
 </head>
+
 <body>
-    
-    <div class="menuOpen hidden" id="menuOverlay">
-        <div class="menu-content">
-            <h2>MENU</h2>
-            <nav>
-                <a href="https://kessiacz.github.io/">Página Inicial</a>
-                <a href="https://kessiacz.github.io/#sobre">Apresentação</a>
-                <a href="https://kessiacz.github.io/#exercicios">Exercícios</a>
-                <a href="https://kessiacz.github.io/#contacts">Contatos</a>
-            </nav>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <nav>
+    <a href="https://kessiacz.github.io/" class="nav-logo">KC.</a>
+    <a href="https://kessiacz.github.io/" class="nav-back">Voltar ao portfólio</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-tag">exercícios práticos</div>
+    <h1 class="hero-title">HTML · CSS · JS</h1>
+    <p class="hero-sub">Coleção de 15 desafios interativos cobrindo lógica de programação, manipulação de DOM e cálculos matemáticos. Clique em cada card para testar.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-n">15</div><div class="stat-l">exercícios</div></div>
+      <div class="stat"><div class="stat-n">JS</div><div class="stat-l">vanilla</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">interativo</div></div>
+    </div>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- 01 -->
+    <div class="card" data-index="0">
+      <div class="card-header">
+        <div>
+          <div class="card-num">01 — desconto</div>
+          <div class="card-name">Desconto de 15%</div>
+          <div class="card-desc">Aplica 15% de desconto e retorna o valor final.</div>
         </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Valor original (R$)</label><input type="number" id="i01" placeholder="Ex: 200.00" min="0"/></div>
+        </div>
+        <button class="btn" onclick="calc01()">Calcular</button>
+        <div class="result" id="r01"></div>
+      </div>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="header-left">
-                <div class="menu">
-                    <i class="ri-menu-line" id="openIcon"></i>
-                    <i class="ri-close-line hidden" id="closeIcon"></i>
-                </div>
-                <a href="https://kessiacz.github.io/" class="back-button">
-                    <i class="ri-arrow-left-line"></i>
-                </a>
-            </div>
-
-            <nav class="nav-desktop">
-               <a href="https://kessiacz.github.io/"><h2>PORTFÓLIO</h2></a>
-            </nav>
-
-            <div class="toggle">
-                <input type="checkbox" name="checkbox" id="checkbox">
-                <label for="checkbox" class="label">
-                    <div class="box"></div>
-                </label>
-            </div>
+    <!-- 02 -->
+    <div class="card" data-index="1">
+      <div class="card-header">
+        <div>
+          <div class="card-num">02 — divisão</div>
+          <div class="card-name">Divisão de Valores</div>
+          <div class="card-desc">Divide dois valores e exibe o resultado.</div>
         </div>
-    </header>
-    
-    <main>
-        <div class="page-title">
-            <h2>HTML – CSS – JS<br>EXERCÍCIOS</h2>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Primeiro valor</label><input type="number" id="i02a" placeholder="Ex: 100"/></div>
+          <div><label>Segundo valor</label><input type="number" id="i02b" placeholder="Ex: 4"/></div>
         </div>
+        <button class="btn" onclick="calc02()">Calcular divisão</button>
+        <div class="result" id="r02"></div>
+      </div>
+    </div>
 
-        <section class="container-exercicios">
-            
-            <details>
-                <summary>01. DESCONTO DE 15%</summary>
-                <div class="content">
-                    <p>Solicita um valor, aplica 15% de desconto e retorna o valor final.</p>
-                    <form id="formExercicio1">
-                        <label for="valorNumerico">VALOR ORIGINAL (R$):</label>
-                        <input type="number" id="valorNumerico" step="0.01" required placeholder="0,00">
-                        <button type="submit">CALCULAR</button>
-                        <p class="resultado" id="resultado1"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 03 -->
+    <div class="card" data-index="2">
+      <div class="card-header">
+        <div>
+          <div class="card-num">03 — tempo</div>
+          <div class="card-name">Dias Vividos</div>
+          <div class="card-desc">Quantos dias você já viveu com base na sua idade.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Sua idade (anos)</label><input type="number" id="i03" placeholder="Ex: 24" min="0" max="120"/></div>
+        </div>
+        <button class="btn" onclick="calc03()">Calcular dias</button>
+        <div class="result" id="r03"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>02. DIVISÃO DE VALORES</summary>
-                <div class="content">
-                    <p>Solicita dois valores e retorna o resultado da divisão.</p>
-                    <form id="formExercicio2">
-                        <label for="valor1">PRIMEIRO VALOR:</label>
-                        <input type="number" id="valor1" step="0.01" required>
-                        <label for="valor2">SEGUNDO VALOR:</label>
-                        <input type="number" id="valor2" step="0.01" required>
-                        <button type="submit">CALCULAR DIVISÃO</button>
-                        <p class="resultado" id="resultado2"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 04 -->
+    <div class="card" data-index="3">
+      <div class="card-header">
+        <div>
+          <div class="card-num">04 — conversor</div>
+          <div class="card-name">Conversor de Dias</div>
+          <div class="card-desc">Transforma dias em Anos, Meses e Dias restantes.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Quantidade de dias</label><input type="number" id="i04" placeholder="Ex: 8760" min="0"/></div>
+        </div>
+        <button class="btn" onclick="calc04()">Converter</button>
+        <div class="result" id="r04"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>03. DIAS VIVIDOS</summary>
-                <div class="content">
-                    <p>Calcula aproximadamente quantos dias o usuário viveu com base na idade.</p>
-                    <form id="formExercicio3">
-                        <label for="idade">SUA IDADE:</label>
-                        <input type="number" id="idade" required>
-                        <button type="submit">CALCULAR DIAS</button>
-                        <p class="resultado" id="resultado3"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 05 -->
+    <div class="card" data-index="4">
+      <div class="card-header">
+        <div>
+          <div class="card-num">05 — combustível</div>
+          <div class="card-name">Consumo de Combustível</div>
+          <div class="card-desc">Média de consumo em Km/L.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Distância percorrida (km)</label><input type="number" id="i05a" placeholder="Ex: 400" min="0"/></div>
+          <div><label>Combustível gasto (L)</label><input type="number" id="i05b" placeholder="Ex: 40" min="0"/></div>
+        </div>
+        <button class="btn" onclick="calc05()">Calcular média</button>
+        <div class="result" id="r05"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>04. CONVERSOR DE DIAS</summary>
-                <div class="content">
-                    <p>Transforma um total de dias em Anos, Meses e Dias.</p>
-                    <form id="formExercicio4">
-                        <label for="dias">QUANTIDADE DE DIAS:</label>
-                        <input type="number" id="dias" required>
-                        <button type="submit">CONVERTER</button>
-                        <p class="resultado" id="resultado4"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 06 -->
+    <div class="card" data-index="5">
+      <div class="card-header">
+        <div>
+          <div class="card-num">06 — porcentagem</div>
+          <div class="card-name">Porcentagem de Desconto</div>
+          <div class="card-desc">Qual foi o % de desconto aplicado num produto.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Valor total original (R$)</label><input type="number" id="i06a" placeholder="Ex: 250" min="0"/></div>
+          <div><label>Valor com desconto (R$)</label><input type="number" id="i06b" placeholder="Ex: 200" min="0"/></div>
+        </div>
+        <button class="btn" onclick="calc06()">Calcular %</button>
+        <div class="result" id="r06"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>05. CONSUMO DE COMBUSTÍVEL</summary>
-                <div class="content">
-                    <p>Calcula a média de consumo (Km/L).</p>
-                    <form id="formExercicio5">
-                        <label for="km">DISTÂNCIA PERCORRIDA (KM):</label>
-                        <input type="number" id="km" step="0.1" required>
-                        <label for="litros">COMBUSTÍVEL GASTO (L):</label>
-                        <input type="number" id="litros" step="0.1" required>
-                        <button type="submit">CALCULAR MÉDIA</button>
-                        <p class="resultado" id="resultado5"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 07 -->
+    <div class="card" data-index="6">
+      <div class="card-header">
+        <div>
+          <div class="card-num">07 — string</div>
+          <div class="card-name">Vogal ou Consoante</div>
+          <div class="card-desc">Verifica se a letra é vogal ou consoante.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Informe a letra</label><input type="text" id="i07" placeholder="Ex: A" maxlength="1"/></div>
+        </div>
+        <button class="btn" onclick="calc07()">Verificar</button>
+        <div class="result" id="r07"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>06. PORCENTAGEM DE DESCONTO</summary>
-                <div class="content">
-                    <p>Calcula qual foi a porcentagem de desconto aplicada em um produto.</p>
-                    <form id="formExercicio6">
-                        <label for="valorProduto">VALOR TOTAL:</label>
-                        <input type="number" id="valorProduto" step="0.01" required>
-                        <label for="valorDesconto">VALOR COM DESCONTO:</label>
-                        <input type="number" id="valorDesconto" step="0.01" required>
-                        <button type="submit">CALCULAR %</button>
-                        <p class="resultado" id="resultado6"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 08 -->
+    <div class="card" data-index="7">
+      <div class="card-header">
+        <div>
+          <div class="card-num">08 — data</div>
+          <div class="card-name">Dia da Semana</div>
+          <div class="card-desc">Número de 1 a 7 → dia correspondente.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Número (1–7)</label><input type="number" id="i08" placeholder="Ex: 3" min="1" max="7"/></div>
+        </div>
+        <button class="btn" onclick="calc08()">Verificar dia</button>
+        <div class="result" id="r08"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>07. VOGAL OU CONSOANTE</summary>
-                <div class="content">
-                    <p>Verifica se a letra informada é uma vogal ou consoante.</p>
-                    <form id="formExercicio7">
-                        <label for="letra">INFORME A LETRA:</label>
-                        <input type="text" id="letra" maxlength="1" required>
-                        <button type="submit">VERIFICAR</button>
-                        <p class="resultado" id="resultado7"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 09 -->
+    <div class="card" data-index="8">
+      <div class="card-header">
+        <div>
+          <div class="card-num">09 — calendário</div>
+          <div class="card-name">Mês e Dias</div>
+          <div class="card-desc">Nome do mês e quantidade de dias.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Número do mês (1–12)</label><input type="number" id="i09" placeholder="Ex: 7" min="1" max="12"/></div>
+        </div>
+        <button class="btn" onclick="calc09()">Verificar mês</button>
+        <div class="result" id="r09"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>08. DIA DA SEMANA</summary>
-                <div class="content">
-                    <p>Recebe um número (1-7) e retorna o dia correspondente.</p>
-                    <form id="formExercicio8">
-                        <label for="valor">NÚMERO (1-7):</label>
-                        <input type="number" id="valor" min="1" max="7" required>
-                        <button type="submit">VERIFICAR DIA</button>
-                        <p class="resultado" id="resultado8"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 10 -->
+    <div class="card" data-index="9">
+      <div class="card-header">
+        <div>
+          <div class="card-num">10 — comparação</div>
+          <div class="card-name">Maior Número</div>
+          <div class="card-desc">Compara dois números e indica o maior.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Primeiro número</label><input type="number" id="i10a" placeholder="Ex: 42"/></div>
+          <div><label>Segundo número</label><input type="number" id="i10b" placeholder="Ex: 17"/></div>
+        </div>
+        <button class="btn" onclick="calc10()">Comparar</button>
+        <div class="result" id="r10"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>09. MÊS E DIAS</summary>
-                <div class="content">
-                    <p>Informa o nome do mês e quantos dias ele possui.</p>
-                    <form id="formExercicio9">
-                        <label for="valorMes">NÚMERO DO MÊS (1-12):</label>
-                        <input type="number" id="valorMes" min="1" max="12" required>
-                        <button type="submit">VERIFICAR MÊS</button>
-                        <p class="resultado" id="resultado9"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 11 -->
+    <div class="card" data-index="10">
+      <div class="card-header">
+        <div>
+          <div class="card-num">11 — análise</div>
+          <div class="card-name">Paridade e Sinal</div>
+          <div class="card-desc">Par/ímpar e positivo/negativo.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Informe o número</label><input type="number" id="i11" placeholder="Ex: -7"/></div>
+        </div>
+        <button class="btn" onclick="calc11()">Analisar</button>
+        <div class="result" id="r11"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>10. MAIOR NÚMERO</summary>
-                <div class="content">
-                    <p>Compara dois números e diz qual é o maior.</p>
-                    <form id="formExercicio10">
-                        <label for="valorA">PRIMEIRO NÚMERO:</label>
-                        <input type="number" id="valorA" required>
-                        <label for="valorB">SEGUNDO NÚMERO:</label>
-                        <input type="number" id="valorB" required>
-                        <button type="submit">COMPARAR</button>
-                        <p class="resultado" id="resultado10"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 12 -->
+    <div class="card" data-index="11">
+      <div class="card-header">
+        <div>
+          <div class="card-num">12 — geometria</div>
+          <div class="card-name">Validação de Triângulo</div>
+          <div class="card-desc">Verifica se a soma dos ângulos internos é 180°.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Ângulo A (°)</label><input type="number" id="i12a" placeholder="Ex: 60" min="0"/></div>
+          <div><label>Ângulo B (°)</label><input type="number" id="i12b" placeholder="Ex: 60" min="0"/></div>
+          <div><label>Ângulo C (°)</label><input type="number" id="i12c" placeholder="Ex: 60" min="0"/></div>
+        </div>
+        <button class="btn" onclick="calc12()">Validar triângulo</button>
+        <div class="result" id="r12"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>11. PARIDADE E SINAL</summary>
-                <div class="content">
-                    <p>Verifica se é par/ímpar e positivo/negativo.</p>
-                    <form id="formExercicio11">
-                        <label for="valor11">INFORME O NÚMERO:</label>
-                        <input type="number" id="valor11" required>
-                        <button type="submit">ANALISAR</button>
-                        <p class="resultado" id="resultado11"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 13 -->
+    <div class="card" data-index="12">
+      <div class="card-header">
+        <div>
+          <div class="card-num">13 — matemática</div>
+          <div class="card-name">Múltiplos</div>
+          <div class="card-desc">Verifica se o 1º valor é múltiplo do 2º.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Primeiro valor</label><input type="number" id="i13a" placeholder="Ex: 12"/></div>
+          <div><label>Segundo valor</label><input type="number" id="i13b" placeholder="Ex: 4"/></div>
+        </div>
+        <button class="btn" onclick="calc13()">Verificar múltiplo</button>
+        <div class="result" id="r13"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>12. VALIDAÇÃO DE TRIÂNGULO</summary>
-                <div class="content">
-                    <p>Verifica se a soma dos ângulos internos resulta em 180º.</p>
-                    <form id="formExercicio12">
-                        <input type="number" id="valorA_12" placeholder="Ângulo 1" required>
-                        <input type="number" id="valorB_12" placeholder="Ângulo 2" required>
-                        <input type="number" id="valorC_12" placeholder="Ângulo 3" required>
-                        <button type="submit">VALIDAR TRIÂNGULO</button>
-                        <p class="resultado" id="resultado12"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 14 -->
+    <div class="card" data-index="13">
+      <div class="card-header">
+        <div>
+          <div class="card-num">14 — esporte</div>
+          <div class="card-name">Categoria Nadador</div>
+          <div class="card-desc">Classifica o nadador por faixa etária.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Idade do nadador</label><input type="number" id="i14" placeholder="Ex: 16" min="0"/></div>
+        </div>
+        <button class="btn" onclick="calc14()">Classificar</button>
+        <div class="result" id="r14"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>13. MÚLTIPLOS</summary>
-                <div class="content">
-                    <p>Verifica se o primeiro valor é múltiplo do segundo.</p>
-                    <form id="formExercicio13">
-                        <input type="number" id="valorA_13" placeholder="Valor A" required>
-                        <input type="number" id="valorB_13" placeholder="Valor B" required>
-                        <button type="submit">VERIFICAR MÚLTIPLO</button>
-                        <p class="resultado" id="resultado13"></p>
-                    </form>
-                </div>
-            </details>
+    <!-- 15 -->
+    <div class="card" data-index="14">
+      <div class="card-header">
+        <div>
+          <div class="card-num">15 — geometria</div>
+          <div class="card-name">Classificação de Ângulos</div>
+          <div class="card-desc">Agudo, Reto, Obtuso ou Raso.</div>
+        </div>
+        <span class="card-toggle">+</span>
+      </div>
+      <div class="card-body">
+        <div class="field-group">
+          <div><label>Valor do ângulo (°)</label><input type="number" id="i15" placeholder="Ex: 45" min="0" max="360"/></div>
+        </div>
+        <button class="btn" onclick="calc15()">Classificar</button>
+        <div class="result" id="r15"></div>
+      </div>
+    </div>
 
-            <details>
-                <summary>14. CATEGORIA NADADOR</summary>
-                <div class="content">
-                    <p>Classifica o nadador em categorias de acordo com a idade.</p>
-                    <form id="formExercicio14">
-                        <label for="valor14">IDADE DO NADADOR:</label>
-                        <input type="number" id="valor14" required>
-                        <button type="submit">CLASSIFICAR</button>
-                        <p class="resultado" id="resultado14"></p>
-                    </form>
-                </div>
-            </details>
+  </div>
 
-            <details>
-                <summary>15. CLASSIFICAÇÃO DE ÂNGULOS</summary>
-                <div class="content">
-                    <p>Determina se o ângulo é Agudo, Reto, Obtuso ou Raso.</p>
-                    <form id="formExercicio15">
-                        <label for="valor15">VALOR DO ÂNGULO:</label>
-                        <input type="number" id="valor15" step="0.01" required>
-                        <button type="submit">CLASSIFICAR</button>
-                        <p class="resultado" id="resultado15"></p>
-                    </form>
-                </div>
-            </details>
+  <footer>
+    <span class="footer-copy">© 2025 Kessia Carvalho</span>
+    <span class="footer-copy" style="color:rgba(122,130,152,0.35)">HTML · CSS · JS</span>
+  </footer>
 
-        </section>
-    </main>
-
+  <script src="./scripts/script.js"></script>
 </body>
 </html>
