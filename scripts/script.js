@@ -4,10 +4,8 @@ document.querySelectorAll('.card-header').forEach(h => {
     const card = h.closest('.card');
     const isOpen = card.classList.contains('open');
 
-    // fecha todos
     document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
 
-    // abre só este (se estava fechado)
     if (!isOpen) card.classList.add('open');
   });
 });
