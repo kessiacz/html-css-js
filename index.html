@@ -4,333 +4,388 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HTML · CSS · JS — Exercícios | Kessia Carvalho</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="./styles/style.css"/>
 </head>
-
 <body>
   <div class="cursor-dot"></div>
   <div class="cursor-outline"></div>
+  <div class="glow-blob glow-blob-1"></div>
+  <div class="glow-blob glow-blob-2"></div>
   <div id="progress-bar"></div>
 
-
-  <nav>
-    <a href="https://kessiacz.github.io/" class="nav-logo">KC.</a>
-    <a href="https://kessiacz.github.io/" class="nav-back">Voltar ao portfólio</a>
-  </nav>
-
-  <div class="hero">
-    <div class="hero-tag">exercícios práticos</div>
-    <h1 class="hero-title">HTML · CSS · JS</h1>
-    <p class="hero-sub">Coleção de 15 desafios interativos cobrindo lógica de programação, manipulação de DOM e cálculos matemáticos. Clique em cada card para testar.</p>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-n">15</div><div class="stat-l">exercícios</div></div>
-      <div class="stat"><div class="stat-n">JS</div><div class="stat-l">vanilla</div></div>
-      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">interativo</div></div>
-    </div>
-  </div>
-
-  <div class="grid" id="grid">
-
-    <!-- 01 -->
-    <div class="card" data-index="0">
-      <div class="card-header">
-        <div>
-          <div class="card-num">01 — desconto</div>
-          <div class="card-name">Desconto de 15%</div>
-          <div class="card-desc">Aplica 15% de desconto e retorna o valor final.</div>
-        </div>
-        <span class="card-toggle">+</span>
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-left">
+        <a class="back-btn" href="https://kessiacz.github.io/">
+          <i class="ri-arrow-left-line"></i> Portfólio
+        </a>
       </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Valor original (R$)</label><input type="number" id="i01" placeholder="Ex: 200.00" min="0"/></div>
+      <a class="header-logo" href="https://kessiacz.github.io/">KC.</a>
+      <div class="header-right">
+        <div class="toggle-wrap">
+          <span>☾</span>
+          <input type="checkbox" id="themeToggle" class="toggle-input">
+          <label for="themeToggle" class="toggle-label"></label>
+          <span>☀</span>
         </div>
-        <button class="btn" onclick="calc01()">Calcular</button>
-        <div class="result" id="r01"></div>
       </div>
     </div>
+  </header>
 
-    <!-- 02 -->
-    <div class="card" data-index="1">
-      <div class="card-header">
-        <div>
-          <div class="card-num">02 — divisão</div>
-          <div class="card-name">Divisão de Valores</div>
-          <div class="card-desc">Divide dois valores e exibe o resultado.</div>
-        </div>
-        <span class="card-toggle">+</span>
+  <!-- ── MAIN ── -->
+  <main>
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+      <a href="https://kessiacz.github.io/">kessiacz</a>
+      <span>/</span>
+      <span>html-css-js</span>
+    </div>
+
+    <!-- page head -->
+    <div class="page-head">
+      <div>
+        <div class="page-head-label">03 — exercícios</div>
+        <h1>HTML · CSS · JS<br>Exercícios</h1>
       </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Primeiro valor</label><input type="number" id="i02a" placeholder="Ex: 100"/></div>
-          <div><label>Segundo valor</label><input type="number" id="i02b" placeholder="Ex: 4"/></div>
-        </div>
-        <button class="btn" onclick="calc02()">Calcular divisão</button>
-        <div class="result" id="r02"></div>
+      <div class="page-head-meta">
+        <span class="tag green">● ativo</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">DOM</span>
+        <span class="tag">Lógica</span>
       </div>
     </div>
 
-    <!-- 03 -->
-    <div class="card" data-index="2">
-      <div class="card-header">
-        <div>
-          <div class="card-num">03 — tempo</div>
-          <div class="card-name">Dias Vividos</div>
-          <div class="card-desc">Quantos dias você já viveu com base na sua idade.</div>
+    <!-- desc -->
+    <div class="desc-block">
+      <p class="desc-text">
+        Coleção de <strong>15 desafios interativos</strong> cobrindo lógica de programação,
+        manipulação de DOM e cálculos matemáticos em <strong>JavaScript Vanilla</strong>.
+        Clique em cada card para expandir e testar.
+      </p>
+      <div class="desc-aside">
+        <div class="aside-item">
+          <div class="aside-label">Exercícios</div>
+          <div class="aside-value aside-big">15</div>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Sua idade (anos)</label><input type="number" id="i03" placeholder="Ex: 24" min="0" max="120"/></div>
+        <div class="aside-item">
+          <div class="aside-label">Stack</div>
+          <div class="aside-value">HTML · CSS · JS Vanilla</div>
         </div>
-        <button class="btn" onclick="calc03()">Calcular dias</button>
-        <div class="result" id="r03"></div>
-      </div>
-    </div>
-
-    <!-- 04 -->
-    <div class="card" data-index="3">
-      <div class="card-header">
-        <div>
-          <div class="card-num">04 — conversor</div>
-          <div class="card-name">Conversor de Dias</div>
-          <div class="card-desc">Transforma dias em Anos, Meses e Dias restantes.</div>
+        <div class="aside-item">
+          <div class="aside-label">Modo</div>
+          <div class="aside-value">100% Interativo</div>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Quantidade de dias</label><input type="number" id="i04" placeholder="Ex: 8760" min="0"/></div>
-        </div>
-        <button class="btn" onclick="calc04()">Converter</button>
-        <div class="result" id="r04"></div>
       </div>
     </div>
 
-    <!-- 05 -->
-    <div class="card" data-index="4">
-      <div class="card-header">
-        <div>
-          <div class="card-num">05 — combustível</div>
-          <div class="card-name">Consumo de Combustível</div>
-          <div class="card-desc">Média de consumo em Km/L.</div>
-        </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Distância percorrida (km)</label><input type="number" id="i05a" placeholder="Ex: 400" min="0"/></div>
-          <div><label>Combustível gasto (L)</label><input type="number" id="i05b" placeholder="Ex: 40" min="0"/></div>
-        </div>
-        <button class="btn" onclick="calc05()">Calcular média</button>
-        <div class="result" id="r05"></div>
-      </div>
-    </div>
+    <!-- ── GRID DE CARDS ── -->
+    <div class="cards-grid" id="grid">
 
-    <!-- 06 -->
-    <div class="card" data-index="5">
-      <div class="card-header">
-        <div>
-          <div class="card-num">06 — porcentagem</div>
-          <div class="card-name">Porcentagem de Desconto</div>
-          <div class="card-desc">Qual foi o % de desconto aplicado num produto.</div>
+      <!-- 01 -->
+      <div class="card" data-index="0">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">01 — desconto</div>
+            <div class="card-name">Desconto de 15%</div>
+            <div class="card-desc">Aplica 15% de desconto e retorna o valor final.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Valor total original (R$)</label><input type="number" id="i06a" placeholder="Ex: 250" min="0"/></div>
-          <div><label>Valor com desconto (R$)</label><input type="number" id="i06b" placeholder="Ex: 200" min="0"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field">
+              <label>Valor original (R$)</label>
+              <input type="number" id="i01" placeholder="Ex: 200.00" min="0"/>
+            </div>
+          </div>
+          <button class="btn" onclick="calc01()">Calcular</button>
+          <div class="result" id="r01"></div>
         </div>
-        <button class="btn" onclick="calc06()">Calcular %</button>
-        <div class="result" id="r06"></div>
       </div>
-    </div>
 
-    <!-- 07 -->
-    <div class="card" data-index="6">
-      <div class="card-header">
-        <div>
-          <div class="card-num">07 — string</div>
-          <div class="card-name">Vogal ou Consoante</div>
-          <div class="card-desc">Verifica se a letra é vogal ou consoante.</div>
+      <!-- 02 -->
+      <div class="card" data-index="1">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">02 — divisão</div>
+            <div class="card-name">Divisão de Valores</div>
+            <div class="card-desc">Divide dois valores e exibe o resultado.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Informe a letra</label><input type="text" id="i07" placeholder="Ex: A" maxlength="1"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Primeiro valor</label><input type="number" id="i02a" placeholder="Ex: 100"/></div>
+            <div class="field"><label>Segundo valor</label><input type="number" id="i02b" placeholder="Ex: 4"/></div>
+          </div>
+          <button class="btn" onclick="calc02()">Calcular divisão</button>
+          <div class="result" id="r02"></div>
         </div>
-        <button class="btn" onclick="calc07()">Verificar</button>
-        <div class="result" id="r07"></div>
       </div>
-    </div>
 
-    <!-- 08 -->
-    <div class="card" data-index="7">
-      <div class="card-header">
-        <div>
-          <div class="card-num">08 — data</div>
-          <div class="card-name">Dia da Semana</div>
-          <div class="card-desc">Número de 1 a 7 → dia correspondente.</div>
+      <!-- 03 -->
+      <div class="card" data-index="2">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">03 — tempo</div>
+            <div class="card-name">Dias Vividos</div>
+            <div class="card-desc">Quantos dias você já viveu com base na sua idade.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Número (1–7)</label><input type="number" id="i08" placeholder="Ex: 3" min="1" max="7"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Sua idade (anos)</label><input type="number" id="i03" placeholder="Ex: 24" min="0" max="120"/></div>
+          </div>
+          <button class="btn" onclick="calc03()">Calcular dias</button>
+          <div class="result" id="r03"></div>
         </div>
-        <button class="btn" onclick="calc08()">Verificar dia</button>
-        <div class="result" id="r08"></div>
       </div>
-    </div>
 
-    <!-- 09 -->
-    <div class="card" data-index="8">
-      <div class="card-header">
-        <div>
-          <div class="card-num">09 — calendário</div>
-          <div class="card-name">Mês e Dias</div>
-          <div class="card-desc">Nome do mês e quantidade de dias.</div>
+      <!-- 04 -->
+      <div class="card" data-index="3">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">04 — conversor</div>
+            <div class="card-name">Conversor de Dias</div>
+            <div class="card-desc">Transforma dias em Anos, Meses e Dias restantes.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Número do mês (1–12)</label><input type="number" id="i09" placeholder="Ex: 7" min="1" max="12"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Quantidade de dias</label><input type="number" id="i04" placeholder="Ex: 8760" min="0"/></div>
+          </div>
+          <button class="btn" onclick="calc04()">Converter</button>
+          <div class="result" id="r04"></div>
         </div>
-        <button class="btn" onclick="calc09()">Verificar mês</button>
-        <div class="result" id="r09"></div>
       </div>
-    </div>
 
-    <!-- 10 -->
-    <div class="card" data-index="9">
-      <div class="card-header">
-        <div>
-          <div class="card-num">10 — comparação</div>
-          <div class="card-name">Maior Número</div>
-          <div class="card-desc">Compara dois números e indica o maior.</div>
+      <!-- 05 -->
+      <div class="card" data-index="4">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">05 — combustível</div>
+            <div class="card-name">Consumo de Combustível</div>
+            <div class="card-desc">Média de consumo em Km/L.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Primeiro número</label><input type="number" id="i10a" placeholder="Ex: 42"/></div>
-          <div><label>Segundo número</label><input type="number" id="i10b" placeholder="Ex: 17"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Distância percorrida (km)</label><input type="number" id="i05a" placeholder="Ex: 400" min="0"/></div>
+            <div class="field"><label>Combustível gasto (L)</label><input type="number" id="i05b" placeholder="Ex: 40" min="0"/></div>
+          </div>
+          <button class="btn" onclick="calc05()">Calcular média</button>
+          <div class="result" id="r05"></div>
         </div>
-        <button class="btn" onclick="calc10()">Comparar</button>
-        <div class="result" id="r10"></div>
       </div>
-    </div>
 
-    <!-- 11 -->
-    <div class="card" data-index="10">
-      <div class="card-header">
-        <div>
-          <div class="card-num">11 — análise</div>
-          <div class="card-name">Paridade e Sinal</div>
-          <div class="card-desc">Par/ímpar e positivo/negativo.</div>
+      <!-- 06 -->
+      <div class="card" data-index="5">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">06 — porcentagem</div>
+            <div class="card-name">Porcentagem de Desconto</div>
+            <div class="card-desc">Qual foi o % de desconto aplicado num produto.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Informe o número</label><input type="number" id="i11" placeholder="Ex: -7"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Valor total original (R$)</label><input type="number" id="i06a" placeholder="Ex: 250" min="0"/></div>
+            <div class="field"><label>Valor com desconto (R$)</label><input type="number" id="i06b" placeholder="Ex: 200" min="0"/></div>
+          </div>
+          <button class="btn" onclick="calc06()">Calcular %</button>
+          <div class="result" id="r06"></div>
         </div>
-        <button class="btn" onclick="calc11()">Analisar</button>
-        <div class="result" id="r11"></div>
       </div>
-    </div>
 
-    <!-- 12 -->
-    <div class="card" data-index="11">
-      <div class="card-header">
-        <div>
-          <div class="card-num">12 — geometria</div>
-          <div class="card-name">Validação de Triângulo</div>
-          <div class="card-desc">Verifica se a soma dos ângulos internos é 180°.</div>
+      <!-- 07 -->
+      <div class="card" data-index="6">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">07 — string</div>
+            <div class="card-name">Vogal ou Consoante</div>
+            <div class="card-desc">Verifica se a letra é vogal ou consoante.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Ângulo A (°)</label><input type="number" id="i12a" placeholder="Ex: 60" min="0"/></div>
-          <div><label>Ângulo B (°)</label><input type="number" id="i12b" placeholder="Ex: 60" min="0"/></div>
-          <div><label>Ângulo C (°)</label><input type="number" id="i12c" placeholder="Ex: 60" min="0"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Informe a letra</label><input type="text" id="i07" placeholder="Ex: A" maxlength="1"/></div>
+          </div>
+          <button class="btn" onclick="calc07()">Verificar</button>
+          <div class="result" id="r07"></div>
         </div>
-        <button class="btn" onclick="calc12()">Validar triângulo</button>
-        <div class="result" id="r12"></div>
       </div>
-    </div>
 
-    <!-- 13 -->
-    <div class="card" data-index="12">
-      <div class="card-header">
-        <div>
-          <div class="card-num">13 — matemática</div>
-          <div class="card-name">Múltiplos</div>
-          <div class="card-desc">Verifica se o 1º valor é múltiplo do 2º.</div>
+      <!-- 08 -->
+      <div class="card" data-index="7">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">08 — data</div>
+            <div class="card-name">Dia da Semana</div>
+            <div class="card-desc">Número de 1 a 7 → dia correspondente.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Primeiro valor</label><input type="number" id="i13a" placeholder="Ex: 12"/></div>
-          <div><label>Segundo valor</label><input type="number" id="i13b" placeholder="Ex: 4"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Número (1–7)</label><input type="number" id="i08" placeholder="Ex: 3" min="1" max="7"/></div>
+          </div>
+          <button class="btn" onclick="calc08()">Verificar dia</button>
+          <div class="result" id="r08"></div>
         </div>
-        <button class="btn" onclick="calc13()">Verificar múltiplo</button>
-        <div class="result" id="r13"></div>
       </div>
-    </div>
 
-    <!-- 14 -->
-    <div class="card" data-index="13">
-      <div class="card-header">
-        <div>
-          <div class="card-num">14 — esporte</div>
-          <div class="card-name">Categoria Nadador</div>
-          <div class="card-desc">Classifica o nadador por faixa etária.</div>
+      <!-- 09 -->
+      <div class="card" data-index="8">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">09 — calendário</div>
+            <div class="card-name">Mês e Dias</div>
+            <div class="card-desc">Nome do mês e quantidade de dias.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Idade do nadador</label><input type="number" id="i14" placeholder="Ex: 16" min="0"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Número do mês (1–12)</label><input type="number" id="i09" placeholder="Ex: 7" min="1" max="12"/></div>
+          </div>
+          <button class="btn" onclick="calc09()">Verificar mês</button>
+          <div class="result" id="r09"></div>
         </div>
-        <button class="btn" onclick="calc14()">Classificar</button>
-        <div class="result" id="r14"></div>
       </div>
-    </div>
 
-    <!-- 15 -->
-    <div class="card" data-index="14">
-      <div class="card-header">
-        <div>
-          <div class="card-num">15 — geometria</div>
-          <div class="card-name">Classificação de Ângulos</div>
-          <div class="card-desc">Agudo, Reto, Obtuso ou Raso.</div>
+      <!-- 10 -->
+      <div class="card" data-index="9">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">10 — comparação</div>
+            <div class="card-name">Maior Número</div>
+            <div class="card-desc">Compara dois números e indica o maior.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
         </div>
-        <span class="card-toggle">+</span>
-      </div>
-      <div class="card-body">
-        <div class="field-group">
-          <div><label>Valor do ângulo (°)</label><input type="number" id="i15" placeholder="Ex: 45" min="0" max="360"/></div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Primeiro número</label><input type="number" id="i10a" placeholder="Ex: 42"/></div>
+            <div class="field"><label>Segundo número</label><input type="number" id="i10b" placeholder="Ex: 17"/></div>
+          </div>
+          <button class="btn" onclick="calc10()">Comparar</button>
+          <div class="result" id="r10"></div>
         </div>
-        <button class="btn" onclick="calc15()">Classificar</button>
-        <div class="result" id="r15"></div>
       </div>
-    </div>
 
-  </div>
+      <!-- 11 -->
+      <div class="card" data-index="10">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">11 — análise</div>
+            <div class="card-name">Paridade e Sinal</div>
+            <div class="card-desc">Par/ímpar e positivo/negativo.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Informe o número</label><input type="number" id="i11" placeholder="Ex: -7"/></div>
+          </div>
+          <button class="btn" onclick="calc11()">Analisar</button>
+          <div class="result" id="r11"></div>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="card" data-index="11">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">12 — geometria</div>
+            <div class="card-name">Validação de Triângulo</div>
+            <div class="card-desc">Verifica se a soma dos ângulos internos é 180°.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Ângulo A (°)</label><input type="number" id="i12a" placeholder="Ex: 60" min="0"/></div>
+            <div class="field"><label>Ângulo B (°)</label><input type="number" id="i12b" placeholder="Ex: 60" min="0"/></div>
+            <div class="field"><label>Ângulo C (°)</label><input type="number" id="i12c" placeholder="Ex: 60" min="0"/></div>
+          </div>
+          <button class="btn" onclick="calc12()">Validar triângulo</button>
+          <div class="result" id="r12"></div>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="card" data-index="12">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">13 — matemática</div>
+            <div class="card-name">Múltiplos</div>
+            <div class="card-desc">Verifica se o 1º valor é múltiplo do 2º.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Primeiro valor</label><input type="number" id="i13a" placeholder="Ex: 12"/></div>
+            <div class="field"><label>Segundo valor</label><input type="number" id="i13b" placeholder="Ex: 4"/></div>
+          </div>
+          <button class="btn" onclick="calc13()">Verificar múltiplo</button>
+          <div class="result" id="r13"></div>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="card" data-index="13">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">14 — esporte</div>
+            <div class="card-name">Categoria Nadador</div>
+            <div class="card-desc">Classifica o nadador por faixa etária.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Idade do nadador</label><input type="number" id="i14" placeholder="Ex: 16" min="0"/></div>
+          </div>
+          <button class="btn" onclick="calc14()">Classificar</button>
+          <div class="result" id="r14"></div>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="card" data-index="14">
+        <div class="card-header">
+          <div class="card-header-content">
+            <div class="card-num">15 — geometria</div>
+            <div class="card-name">Classificação de Ângulos</div>
+            <div class="card-desc">Agudo, Reto, Obtuso ou Raso.</div>
+          </div>
+          <span class="card-toggle"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="card-body">
+          <div class="field-group">
+            <div class="field"><label>Valor do ângulo (°)</label><input type="number" id="i15" placeholder="Ex: 45" min="0" max="360"/></div>
+          </div>
+          <button class="btn" onclick="calc15()">Classificar</button>
+          <div class="result" id="r15"></div>
+        </div>
+      </div>
+
+    </div><!-- /cards-grid -->
+  </main>
 
   <footer>
-    <span class="footer-copy">© 2026 Kessia Carvalho</span>
-    <span class="footer-copy" style="color:rgba(122,130,152,0.35)">HTML · CSS · JS</span>
+    <span>© 2026 Kessia Carvalho</span>
+    <a href="https://kessiacz.github.io/">← voltar ao portfólio</a>
   </footer>
 
   <script src="./scripts/script.js"></script>
